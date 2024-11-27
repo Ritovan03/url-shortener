@@ -14,7 +14,13 @@ async function handleGenerateNewShortURL(req, res) {
 
     try {
         await newURL.save(); // Save the new URL to the database
-        return res.status(201).json({ id: shortID }); // Respond with the generated short ID
+        return res.render('home', 
+            { id: shortID,
+                
+            }
+        ); // Render the home page with the generated short ID
+        
+        //return res.status(201).json({ id: shortID }); // Respond with the generated short ID
     } catch (error) {
         console.error("Error saving URL:", error.message);
         return res.status(500).json({ error: "Internal Server Error" });

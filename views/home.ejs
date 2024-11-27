@@ -14,7 +14,11 @@
 </head>
 <body>
     <h1>URL Shortener</h1>
-
+    <% if (locals.id) { %>
+        <p>URL Generated: 
+            <a href = "http://localhost:8080/url/<%= locals.id %>">http://localhost:8080/url/<%= locals.id %></a>
+        </p><%}
+        %>
     <div>
         <form method = "POST" action = "/url">
             <label>Enter Your original URL</label>
@@ -23,6 +27,33 @@
             <br>
             <button type = "submit">Shorten</button>
         </form>
+    </div>
+    <% if (locals.urls) { %>
+     <table> 
+        <thead>
+            <tr>
+                <th>S. No</th>
+                <th>Short URL ID</th>
+                <th>Redirect</th>
+                <th>Clicks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% urls.forEach((url,index) => { %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= url.shortId %></td>
+                    <td><a href = "http://localhost:8080/url/<%= url.shortId %>">http://localhost:8080/url/<%= url.shortId %></a></td>
+                    <td><%= url.visitHistory.length %></td>
+                </tr>
+            <% });
+             %>
+        </tbody>
+     </table>
+
+    <% } %>
+    <div>
+
     </div>
 </body>
 </html>
