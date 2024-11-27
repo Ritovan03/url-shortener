@@ -9,6 +9,8 @@ const URL = require('./models/url');
 connectToMongoDB('mongodb://localhost:27017/short-url')
 .then(()=> console.log("MongoDB connected"));
 
+app.set('view engine', 'ejs');
+
 app.use(express.json());
 
 app.get('/:shortId', async (req, res) => {
